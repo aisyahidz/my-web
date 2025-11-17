@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Nur A'isyah — Where Elegance Meets Passion.</title>
+<meta name="author" content="Nur A'isyah Binti Idzham">
+<meta name="description" content="Personal site of Nur A'isyah — horseriding stories, gallery, contact. Beige luxury aesthetic.">
+<style>
+  /* Palette & base */
+  :root{
+    --beige: #efe6dc;
+    --navy: #0b2342;
+    --brown: #4b2e2b;
+    --maroon: #6f1d1b;
+    --muted: #85766a;
+    --radius: 18px;
+    --shadow: 0 6px 20px rgba(11,35,66,0.08);
+  }
+  *{box-sizing:border-box}
+  html { scroll-behavior:smooth; }
+  body{
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Helvetica Neue";
+    background: radial-gradient(circle at 10% 10%, rgba(11,35,66,0.02), transparent 10%), var(--beige);
+    color: var(--navy);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
+
+  /* Header / Hero */
+  header.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    padding:40px 24px;
+    overflow:hidden;
+  }
+  .hero-inner{
+    width:100%;
+    max-width:1100px;
+    display:grid;
+    grid-template-columns: 1fr 420px;
+    gap:32px;
+    align-items:center;
+    z-index:5;
+  }
+  .hero-card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.62));
+    border-radius: var(--radius);
+    padding:28px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(6px);
+  }
+  h1{ margin:0 0 12px 0; font-size:34px; color:var(--navy); }
+  .tagline{ color:var(--muted); font-size:16px; margin-bottom:18px; }
+  .cta-row{ display:flex; gap:12px; flex-wrap:wrap; }
+  .btn{
+    background:var(--beige);
+    border:1px solid rgba(11,35,66,0.06);
+    padding:10px 18px;
+    border-radius:28px;
+    cursor:pointer;
+    font-weight:600;
+    box-shadow: 0 6px 18px rgba(11,35,66,0.06);
+    transition: transform .22s ease, box-shadow .22s ease;
+    color:var(--navy);
+  }
+  .btn:hover{ transform:translateY(-4px); box-shadow:0 14px 30px rgba(11,35,66,0.08); }
+  .btn.primary{
+    background: linear-gradient(90deg, rgba(11,35,66,0.95), rgba(75,46,43,0.92));
+    color: #fff;
+    border: none;
+  }
+  .btn[data-expand]{ position:relative; overflow:hidden; }
+  .btn[data-expand].is-expanding{ transform:scale(1.04); box-shadow: 0 20px 44px rgba(111,29,27,0.08); }
+
+  /* Floating nav */
+  nav.floating{
+    position: fixed;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.75);
+    border-radius: 14px;
+    padding:10px;
+    box-shadow: var(--shadow);
+    z-index:999;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    backdrop-filter: blur(6px);
+  }
+  nav.floating button{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:none;
+    background:var(--beige);
+    color:var(--navy);
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  nav.floating button:hover{
+    transform:translateY(-6px);
+    box-shadow:0 12px 26px rgba(11,35,66,0.08);
+    color:var(--maroon);
+  }
+
+  /* Sections */
+  section{ padding:80px 20px; max-width:1100px; margin:0 auto; }
+  .card{ background:#fff; border-radius:14px; padding:22px; box-shadow:var(--shadow); }
+  .two-col{ display:grid; grid-template-columns:1fr 380px; gap:20px; align-items:start; }
+
+  /* Biodata table */
+  .bio-table{ width:100%; border-collapse:collapse; font-size:15px; }
+  .bio-table td{ padding:10px 8px; vertical-align:top; border-bottom:1px dashed rgba(11,35,66,0.04); }
+  .bio-key{ color:var(--muted); width:38%; font-weight:600; }
+  .profile-photo{ width:100%; border-radius:12px; object-fit:cover; border:6px solid rgba(239,230,220,0.9); }
+
+  /* Experience */
+  .experience-hero{ position:relative; overflow:hidden; border-radius:14px; padding:28px; background: linear-gradient(180deg, rgba(11,35,66,0.03), rgba(111,29,27,0.02)); }
+  .experience-text p{ color:#2a2a2a; line-height:1.65; margin-bottom:12px; font-size:16.2px; }
+  .quote{ margin-top:16px; padding:14px 18px; border-radius:12px; background: rgba(255,255,255,0.9); color:var(--brown); font-style:italic; box-shadow:0 6px 18px rgba(11,35,66,0.03); }
+
+  /* horse svg draw */
+  .horse-wrap{ position:absolute; right:-40px; bottom:-10px; width:420px; opacity:0.12; transform: rotate(-8deg); pointer-events:none; }
+  svg.horse path{ stroke:var(--navy); stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1200; stroke-dashoffset:1200; animation: draw 6s linear forwards; }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  /* particles */
+  #particles{ position:fixed; left:0; top:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+
+  /* gallery */
+  .gallery-grid{ display:grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+  .gallery-item{ position:relative; overflow:hidden; border-radius:10px; background:linear-gradient(180deg, rgba(11,35,66,0.02), rgba(111,29,27,0.02)); cursor:pointer; }
+  .gallery-item img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .45s ease; }
+  .gallery-item:hover img{ transform: scale(1.06); }
+  .gallery-caption{ position:absolute; left:10px; bottom:10px; background:rgba(239,230,220,0.9); padding:6px 10px; border-radius:8px; color:var(--navy); font-weight:600; box-shadow:0 6px 18px rgba(11,35,66,0.03); }
+
+  .lightbox{ position:fixed; inset:0; background:rgba(5,10,23,0.7); display:none; place-items:center; z-index:9999; }
+  .lightbox img{ max-width:88%; max-height:88%; border-radius:12px; box-shadow:0 30px 80px rgba(2,8,20,0.6); }
+
+  /* contact */
+  .contact-form{ max-width:620px; margin:0 auto; display:grid; gap:12px; }
+  .input, textarea{ padding:12px 14px; border-radius:12px; border:1px solid rgba(11,35,66,0.06); font-size:15px; }
+  .input:focus, textarea:focus{ outline:none; box-shadow:0 6px 20px rgba(11,35,66,0.04); }
+
+  footer{ padding:40px 20px; text-align:center; color:var(--muted); font-size:14px; }
+
+  @media(max-width:980px){
+    .hero-inner{ grid-template-columns:1fr; }
+    .two-col{ grid-template-columns:1fr; }
+    nav.floating{ right:14px; top:auto; bottom:18px; left:50%; transform:translateX(50%); flex-direction:row; padding:8px; border-radius:40px; }
+    nav.floating button{ width:44px; height:44px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<nav class="floating" aria-label="Quick navigation">
+  <button title="Home" onclick="scrollToId('home')">🏠</button>
+  <button title="Biodata" onclick="scrollToId('biodata')">👤</button>
+  <button title="Experience" onclick="scrollToId('experience')">🐎</button>
+  <button title="Gallery" onclick="scrollToId('gallery')">🖼️</button>
+  <button title="Contact" onclick="scrollToId('contact')">✉️</button>
+</nav>
+
+<header id="home" class="hero" role="banner">
+  <div class="hero-inner">
+    <div class="hero-card">
+      <h1>Nur A'isyah Binti Idzham</h1>
+      <div class="tagline">Where Elegance Meets Passion.</div>
+      <p style="color:var(--muted); margin:0 0 18px 0;">
+        Diploma in Information Management — Bukit Mertajam, Penang.<br/>
+        love to explore new things, movie lover, and a rider at heart.
+      </p>
+      <div class="cta-row">
+        <button class="btn primary" onclick="scrollToId('experience')" data-expand>Read My Riding Story</button>
+        <button class="btn" onclick="scrollToId('biodata')">View Biodata</button>
+        <button class="btn" onclick="scrollToId('gallery')">See Gallery</button>
+      </div>
+      <div style="margin-top:16px; color:var(--muted); font-size:13px;">
+        <span id="greetingSmall">Hello —</span> <span id="clockSmall"></span>
+      </div>
+    </div>
+
+    <aside>
+      <div class="card" style="text-align:center;">
+        <img src="assets/profile.jpg" alt="Nur A'isyah" class="profile-photo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22350%22 height=%22350%22><rect width=%22350%22 height=%22350%22 fill=%22%23efe6dc%22/><text x=%2250%22 y=%22180%22 font-size=%2222%22 fill=%22%230b2342%22>Upload profile.jpg</text></svg>'">
+        <div style="margin-top:12px; color:var(--muted);">Diploma in Information Management — UiTM</div>
+        <div style="margin-top:10px;">
+          <button class="btn" onclick="scrollToId('contact')">Contact Me</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="horse-wrap" aria-hidden="true">
+    <svg class="horse" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+      <path d="M28 300 C70 210, 140 180, 200 170 C260 160, 320 170, 370 200 C420 230, 480 230, 540 210
+               C520 170, 480 150, 440 140 C400 130, 360 132, 320 140 C300 145, 250 150, 220 160
+               C200 165, 170 175, 150 200 C140 215, 130 235, 120 260 C110 290, 80 320, 28 300 Z"/>
+    </svg>
+  </div>
+</header>
+
+<section id="biodata">
+  <div class="card">
+    <h2>Biodata</h2>
+    <div class="two-col" style="margin-top:14px;">
+      <div>
+        <table class="bio-table" role="table" aria-label="biodata">
+          <tr><td class="bio-key">Full name</td><td>Nur A'isyah Binti Idzham</td></tr>
+          <tr><td class="bio-key">Age</td><td>20</td></tr>
+          <tr><td class="bio-key">Date of birth</td><td>10 April 2005</td></tr>
+          <tr><td class="bio-key">Location</td><td>Bukit Mertajam, Penang</td></tr>
+          <tr><td class="bio-key">Hobbies</td><td>Movies, music, horseriding</td></tr>
+          <tr><td class="bio-key">Program</td><td>Diploma in Information Management — UiTM</td></tr>
+        </table>
+        <div style="margin-top:12px; color:var(--muted); font-size:14px;">
+          <strong>Note:</strong> Profile photo can be replaced by uploading <code>assets/profile.jpg</code>.
+        </div>
+      </div>
+
+      <div>
+        <div style="text-align:left;">
+          <h3 style="margin-top:0">Quick facts</h3>
+          <ul style="padding-left:18px; color:var(--muted);">
+            <li><strong>Calm confidence</strong> – trust preparation over chance.</li>
+            <li><strong>Trust</strong> – built slowly, like a rider and horse.</li>
+            <li><strong>Communication</strong> – not always words.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="experience-hero">
+    <h2>Experience — Horseriding</h2>
+    <div class="two-col" style="margin-top:18px;">
+      <div class="experience-text">
+        <p>I started riding at 13, at AMS Equestrian Club in Serdang, a place where dust and sunlight weave into memories. My father often brought me to the stables; watching him move with the horses planted a quiet longing in me. The first time I climbed up, my hands trembled with fear and excitement. I wasn't confident but he stood beside me, patient and steady. It was that steady presence that made me try again and again.</p>
+        <p>One of my fondest days was an outride along the Pahang coastline, sand beneath the horse's hooves, the sea wind pulling at our clothes, and the horizon a long promise. The rhythm of the ride felt like a slow conversation between rider and mount. Another unforgettable moment was witnessing the Merdeka Cup at Selangor Turf Club.. The calm before each race, the thunder of hooves, and the electric hush of the crowd. These moments taught me that some of life’s most honest truths are read not in words but in movement: trust, calmness, and the humbling reminder that we can't control everything.</p>
+        <div class="quote">"You can't control everything — only how you respond. Confidence comes from calmness, not perfection."</div>
+      </div>
+
+      <aside style="position:relative;">
+        <div style="margin-bottom:12px;">
+          <div style="border-radius:12px; overflow:hidden;">
+            <video controls style="width:100%; display:block;" poster="assets/video-poster.jpg" onerror="this.style.display='none'">
+              <source src="assets/horseride.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px;">
+          <h4 style="margin:0 0 8px 0;">Lessons from Riding</h4>
+          <ol style="margin:0; padding-left:18px; color:var(--muted);">
+            <li>Trust must be built, not demanded.</li>
+            <li>Confidence grows from calmness.</li>
+            <li>Communication isn't always words.</li>
+            <li>Embrace small, consistent progress.</li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+
+    <svg style="position:absolute; left:8%; top:8%; width:160px; opacity:0.06;" viewBox="0 0 200 100">
+      <path d="M10 80 C40 10, 160 10, 190 80" stroke="#0b2342" stroke-width="2" fill="none" stroke-linecap="round" />
+    </svg>
+  </div>
+
+  <div style="margin-top:22px;" class="card">
+    <h3>The Best Moment of 2025 — Mama's 53rd Birthday Surprise</h3>
+    <p style="color:var(--muted)">It happened at <strong>Café Halzan, Penang</strong>. My siblings and I planned everything quietly — from the birthday message written on a waffle to the table decorations I coordinated with the café staff. In the middle of dinner, the staff walked toward our table carrying the decorated waffle and began singing <em>Happy Birthday</em>. Mama froze, laughed, and then went completely speechless — the kind of silence that only happens when someone is truly touched.</p>
+    <p style="color:var(--muted)">For me, the most touching part was seeing her smile so genuinely. Seeing her happy felt like the truest kind of fulfilment... a reminder that making your mother smile is one of the purest forms of love.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:8px; margin-top:12px;">
+      <!-- Mama images (place images in assets/ named mama_1.jpg ... mama_4.jpg) -->
+      <div style="overflow:hidden; border-radius:10px;"><img src="mama_1.jpg" style="width:100%;height:160px;object-fit:cover;" onerror="this.style.opacity=.2"></div>
+      <div style="overflow:hidden; border-radius:10px;"><img src="mama_2.jpg" style="width:100%;height:160px;object-fit:cover;" onerror="this.style.opacity=.2"></div>
+      <div style="overflow:hidden; border-radius:10px;"><img src="mama_3.jpg" style="width:100%;height:160px;object-fit:cover;" onerror="this.style.opacity=.2"></div>
+      <div style="overflow:hidden; border-radius:10px;"><img src="mama_4.jpg" style="width:100%;height:160px;object-fit:cover;" onerror="this.style.opacity=.2"></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="card">
+    <h2>Gallery</h2>
+    <p style="color:var(--muted)">Photos will be updated over time. Upload replacements to <code>/assets/</code> to refresh the site.</p>
+    <div style="margin-top:14px" class="gallery-grid">
+      <!-- Horseriding images (assets/horse_1.jpg ... ) -->
+      <div class="gallery-item" data-caption="Horseriding"><img src="assets/horse_1.jpg" alt="Horseriding" onerror="this.style.opacity=.2"><div class="gallery-caption">Horseriding</div></div>
+      <div class="gallery-item" data-caption="Riding"><img src="assets/horse_2.jpg" alt="Riding" onerror="this.style.opacity=.2"><div class="gallery-caption">Riding</div></div>
+      <div class="gallery-item" data-caption="Riding"><img src="assets/horse_3.jpg" alt="Riding" onerror="this.style.opacity=.2"><div class="gallery-caption">Riding</div></div>
+      <div class="gallery-item" data-caption="Riding"><img src="assets/horse_4.jpg" alt="Riding" onerror="this.style.opacity=.2"><div class="gallery-caption">Riding</div></div>
+
+             </div>
+</section>
+
+<div id="lightbox" class="lightbox" onclick="closeLightbox()"><img id="lightboxImg" src="" alt="expanded"></div>
+
+<section id="contact">
+  <div class="card">
+    <h2>Contact Me</h2>
+    <p style="color:var(--muted)">Prefer email? <strong>example@example.com</strong></p>
+
+    <form class="contact-form" onsubmit="event.preventDefault(); submitContact();">
+      <input class="input" type="text" id="name" placeholder="Your name" required>
+      <input class="input" type="email" id="email" placeholder="Your email" required>
+      <textarea class="input" id="message" placeholder="Message" rows="5" required></textarea>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <button class="btn primary" data-expand type="submit">Send Message</button>
+        <div style="color:var(--muted); font-size:13px;">I'll reply via email.</div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  &copy; <strong>Nur A'isyah Binti Idzham</strong> — Designed for IMD318 project.<br>
+  <small>Made with beige & navy — upload your images to <code>/assets/</code></small>
+</footer>
+
+<script>
+/* Smooth scroll */
+function scrollToId(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - 24;
+  window.scrollTo({ top, behavior:'smooth' });
+}
+
+/* Button expand animation */
+document.querySelectorAll('.btn[data-expand]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    btn.classList.add('is-expanding');
+    setTimeout(()=> btn.classList.remove('is-expanding'), 420);
+  });
+});
+
+/* Greeting + clock */
+function updateClock(){
+  const now = new Date();
+  const h = now.getHours();
+  const greeting = h < 12 ? 'Good morning' : (h < 18 ? 'Good afternoon' : 'Good evening');
+  document.getElementById('greetingSmall').textContent = greeting + ',';
+  document.getElementById('clockSmall').textContent = now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+}
+updateClock(); setInterval(updateClock, 1000);
+
+/* Lightbox */
+document.querySelectorAll('.gallery-item').forEach(item=>{
+  item.addEventListener('click', ()=>{
+    const img = item.querySelector('img');
+    if(!img) return;
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightboxImg');
+    lbImg.src = img.src;
+    lb.style.display = 'grid';
+  });
+});
+function closeLightbox(){ document.getElementById('lightbox').style.display='none'; }
+
+/* Fake contact submit */
+function submitContact(){
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  alert('Thank you, ' + (name||'friend') + '! Your message has been recorded (demo). I will contact you at ' + (email||'your email') + '.');
+  document.querySelector('.contact-form').reset();
+}
+
+/* Horse SVG draw replay */
+const horseSvg = document.querySelector('.horse path');
+if(horseSvg){
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        horseSvg.style.animation = 'none';
+        void horseSvg.offsetWidth;
+        horseSvg.style.animation = 'draw 6s linear forwards';
+      }
+    });
+  }, {threshold:0.2});
+  obs.observe(document.querySelector('.horse-wrap'));
+}
+
+/* Particles/bubbles canvas */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, particles=[];
+function initParticles(){
+  W = canvas.width = innerWidth;
+  H = canvas.height = innerHeight;
+  particles = [];
+  for(let i=0;i<28;i++){
+    particles.push({
+      x: Math.random()*W,
+      y: Math.random()*H,
+      r: 8 + Math.random()*22,
+      vy: 0.2 + Math.random()*0.6,
+      vx: -0.2 + Math.random()*0.4,
+      alpha: 0.06 + Math.random()*0.12
+    });
+  }
+}
+function drawParticles(){
+  ctx.clearRect(0,0,W,H);
+  for(const p of particles){
+    p.x += p.vx;
+    p.y -= p.vy;
+    if(p.y < -60) { p.y = H + 60; p.x = Math.random()*W; }
+    if(p.x < -200) p.x = W + 200;
+    ctx.beginPath();
+    const g = ctx.createRadialGradient(p.x, p.y, p.r*0.1, p.x, p.y, p.r);
+    g.addColorStop(0, `rgba(11,35,66,${p.alpha*0.9})`);
+    g.addColorStop(0.5, `rgba(111,29,27,${p.alpha*0.25})`);
+    g.addColorStop(1, `rgba(239,230,220,0)`);
+    ctx.fillStyle = g;
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    ctx.fill();
+  }
+  requestAnimationFrame(drawParticles);
+}
+initParticles(); drawParticles();
+addEventListener('resize', ()=>{ initParticles(); });
+
+/* small sparkle hover on gallery */
+document.querySelectorAll('.gallery-item').forEach(item=>{
+  item.addEventListener('mouseenter', ()=>{
+    const s = document.createElement('span');
+    s.style.position = 'absolute';
+    s.style.left = Math.random()*80 + '%';
+    s.style.top = Math.random()*80 + '%';
+    s.style.width = s.style.height = (6 + Math.random()*10) + 'px';
+    s.style.background = 'radial-gradient(circle,#fff,#f6e7e0)';
+    s.style.borderRadius = '50%';
+    s.style.opacity = '.0';
+    s.style.transform = 'scale(.2)';
+    s.style.pointerEvents='none';
+    s.style.boxShadow = '0 6px 18px rgba(111,29,27,0.12)';
+    s.style.transition = 'opacity .6s ease, transform .6s ease';
+    item.appendChild(s);
+    requestAnimationFrame(()=>{ s.style.opacity = '1'; s.style.transform='scale(1.5)'; });
+    setTimeout(()=>{ s.style.opacity = '0'; s.style.transform='scale(0.2)'; setTimeout(()=>s.remove(),700); },700);
+  });
+});
+</script>
+</body>
+</html>
